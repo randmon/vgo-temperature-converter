@@ -57,5 +57,10 @@ namespace View
                 return "";
             }
         }
+
+        private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }
