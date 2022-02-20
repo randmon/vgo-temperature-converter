@@ -27,12 +27,12 @@ namespace View
 
         private void ConvertToCelsius(object sender, RoutedEventArgs e)
         {
-            ConvertBox(celsiusTextBox, fahrenheitTextBox, x => (x - 32) / 1.8);
+            ConvertBox(fahrenheitTextBox, celsiusTextBox, x => (x - 32) / 1.8);
         }
 
         private void ConvertToFahrenheit(object sender, RoutedEventArgs e)
         {
-            ConvertBox(fahrenheitTextBox, celsiusTextBox, x => x * 1.8 + 32);
+            ConvertBox(celsiusTextBox, fahrenheitTextBox, x => x * 1.8 + 32);
         }
 
         private void ConvertBox(TextBox source, TextBox dest, Func<double, double> conversion)

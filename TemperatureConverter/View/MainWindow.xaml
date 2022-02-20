@@ -6,27 +6,40 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Style x:Key="labelStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="Violet" Offset="0.0" />
+                        <GradientStop Color="Aqua" Offset="0.5" />
+                        <GradientStop Color="GreenYellow" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style x:Key="textBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#222"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        
+    </Window.Resources>
     <StackPanel>
-        <TextBlock Text="Celsius" FontWeight="Bold" Padding="2" FontSize="16">
-            <TextBlock.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="BlueViolet" Offset="0.0" />
-                    <GradientStop Color="Aqua" Offset="0.5" />
-                    <GradientStop Color="GreenYellow" Offset="1" />
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBox x:Name="celsiusTextBox" TextAlignment="Center"/>
-        <TextBlock Text="Fahrenheit" FontWeight="Bold" Padding="2" FontSize="16">
-            <TextBlock.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="Yellow" Offset="0.0" />
-                    <GradientStop Color="OrangeRed" Offset="1" />
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBox x:Name="fahrenheitTextBox" TextAlignment="Center"/>
-        <Button Content="Convert to Celsius" Click="ConvertToCelsius"/>
-        <Button Content="Convert to Fahrenheit" Click="ConvertToFahrenheit"/>
+        <TextBlock Text="Celsius" Style="{StaticResource labelStyle}"/>
+        <TextBox x:Name="celsiusTextBox" Style="{StaticResource textBoxStyle}"/>
+        <TextBlock Text="Fahrenheit" Style="{StaticResource labelStyle}"/>
+        <TextBox x:Name="fahrenheitTextBox" Style="{StaticResource textBoxStyle}"/>
+        <Button Content="Convert to Celsius" Click="ConvertToCelsius" Style="{StaticResource buttonStyle}"/>
+        <Button Content="Convert to Fahrenheit" Click="ConvertToFahrenheit" Style="{StaticResource buttonStyle}"/>
     </StackPanel>
 </Window>
