@@ -25,27 +25,36 @@ namespace View
             InitializeComponent();
         }
 
-        private void ConvertToCelsius(object sender, RoutedEventArgs e)
+        private void ConvertCelsius(object sender, RoutedEventArgs e)
         {
-            ConvertBox(fahrenheitTextBox, x => (x - 32) / 1.8);
+            fahrenheitTextBox.Text = Convert(celsiusTextBox, x => x * 1.8 + 32);
+            kelvinTextBox.Text = Convert(celsiusTextBox, x => x + 273.15);
         }
 
-        private void ConvertToFahrenheit(object sender, RoutedEventArgs e)
+        private void ConvertFahrenheit(object sender, RoutedEventArgs e)
         {
-            ConvertBox(celsiusTextBox, x => x * 1.8 + 32);
+            celsiusTextBox.Text = Convert(fahrenheitTextBox, x => (x - 32) / 1.8);
+            kelvinTextBox.Text = Convert(fahrenheitTextBox, x => (x + 459.67) * 5/9);
         }
 
-        private void ConvertBox(TextBox t, Func<double, double> conversion)
+        private void ConvertKelvin(object sender, RoutedEventArgs e)
+        {
+            celsiusTextBox.Text = Convert(kelvinTextBox, x => x - 273.15);
+            fahrenheitTextBox.Text = Convert(kelvinTextBox, x => x * 9/5 - 459.67);
+        }
+
+        private string Convert(TextBox t, Func<double, double> conversion)
         {
             try
             {
                 var val = double.Parse(t.Text);
                 var res = Math.Round(conversion(val), 2);
-                t.Text = res.ToString();
+                return res.ToString();
             }
             catch (FormatException)
             {
                 MessageBox.Show(this, "Please insert a numeric value", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return "";
             }
         }
     }
