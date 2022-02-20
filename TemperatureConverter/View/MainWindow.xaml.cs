@@ -2,18 +2,38 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Diagnostics;
+using System.ComponentModel;
 
 namespace View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public double temperatureInKelvin;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        public double TemperatureInKelvin
+        {
+            get
+            {
+                return temperatureInKelvin;
+            }
+            set
+            {
+                temperatureInKelvin = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TemperatureInKelvin)));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class TemperatureConverter : IValueConverter
