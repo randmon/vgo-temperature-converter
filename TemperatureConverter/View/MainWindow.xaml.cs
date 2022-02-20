@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,22 +26,22 @@ namespace View
             InitializeComponent();
         }
 
-        private void ConvertCelsius()
+        /*private void ConvertCelsius()
         {
-            fahrenheitTextBox.Text = Convert(celsiusTextBox, x => x * 1.8 + 32);
-            kelvinTextBox.Text = Convert(celsiusTextBox, x => x + 273.15);
+            //fahrenheitTextBox.Text = Convert(celsiusTextBox, x => x * 1.8 + 32);
+            //kelvinTextBox.Text = Convert(celsiusTextBox, x => x + 273.15);
         }
 
         private void ConvertFahrenheit()
         {
-            celsiusTextBox.Text = Convert(fahrenheitTextBox, x => (x - 32) / 1.8);
-            kelvinTextBox.Text = Convert(fahrenheitTextBox, x => (x + 459.67) * 5/9);
+            //celsiusTextBox.Text = Convert(fahrenheitTextBox, x => (x - 32) / 1.8);
+            //kelvinTextBox.Text = Convert(fahrenheitTextBox, x => (x + 459.67) * 5/9);
         }
 
         private void ConvertKelvin()
         {
-            celsiusTextBox.Text = Convert(kelvinTextBox, x => x - 273.15);
-            fahrenheitTextBox.Text = Convert(kelvinTextBox, x => x * 9/5 - 459.67);
+            //celsiusTextBox.Text = Convert(kelvinTextBox, x => x - 273.15);
+            //fahrenheitTextBox.Text = Convert(kelvinTextBox, x => x * 9/5 - 459.67);
         }
 
         private string Convert(TextBox t, Func<double, double> conversion)
@@ -56,14 +57,31 @@ namespace View
                 MessageBox.Show(this, "Please insert a numeric value", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return "";
             }
-        }
+        }*/
 
         private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double x = slider.Value;
-            kelvinTextBox.Text = Math.Round(x, 2).ToString();
-            celsiusTextBox.Text = Math.Round(x - 273.15, 2).ToString();
             fahrenheitTextBox.Text = Math.Round(x * 9 / 5 - 459.67, 2).ToString();
+        }
+    }
+
+    public class CelsiusConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var kelvin = (double)value;
+            var celsius = kelvin - 273.15;
+
+            return celsius.ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var celsius = double.Parse((string)value);
+            var kelvin = celsius + 273.15;
+
+            return kelvin;
         }
     }
 }
