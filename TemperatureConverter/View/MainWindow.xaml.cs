@@ -25,19 +25,19 @@ namespace View
             InitializeComponent();
         }
 
-        private void ConvertCelsius(object sender, RoutedEventArgs e)
+        private void ConvertCelsius()
         {
             fahrenheitTextBox.Text = Convert(celsiusTextBox, x => x * 1.8 + 32);
             kelvinTextBox.Text = Convert(celsiusTextBox, x => x + 273.15);
         }
 
-        private void ConvertFahrenheit(object sender, RoutedEventArgs e)
+        private void ConvertFahrenheit()
         {
             celsiusTextBox.Text = Convert(fahrenheitTextBox, x => (x - 32) / 1.8);
             kelvinTextBox.Text = Convert(fahrenheitTextBox, x => (x + 459.67) * 5/9);
         }
 
-        private void ConvertKelvin(object sender, RoutedEventArgs e)
+        private void ConvertKelvin()
         {
             celsiusTextBox.Text = Convert(kelvinTextBox, x => x - 273.15);
             fahrenheitTextBox.Text = Convert(kelvinTextBox, x => x * 9/5 - 459.67);
@@ -60,7 +60,10 @@ namespace View
 
         private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            double x = slider.Value;
+            kelvinTextBox.Text = Math.Round(x, 2).ToString();
+            celsiusTextBox.Text = Math.Round(x - 273.15, 2).ToString();
+            fahrenheitTextBox.Text = Math.Round(x * 9 / 5 - 459.67, 2).ToString();
         }
     }
 }
