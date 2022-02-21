@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace View
+namespace Model
 {
     public interface ITemperatureScale
     {
