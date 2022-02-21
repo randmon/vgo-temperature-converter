@@ -20,12 +20,12 @@ namespace View
 
         public double ConvertFromKelvin(double temperature)
         {
-            return temperature;
+            return Math.Round(temperature, 2);
         }
 
         public double ConvertToKelvin(double temperature)
         {
-            return temperature;
+            return Math.Round(temperature, 2);
         }
     }
 
@@ -35,12 +35,12 @@ namespace View
 
         public double ConvertFromKelvin(double temperature)
         {
-            return temperature - 273.15;
+            return Math.Round(temperature - 273.15, 2);
         }
 
         public double ConvertToKelvin(double temperature)
         {
-            return temperature + 273.15;
+            return Math.Round(temperature + 273.15, 2);
         }
     }
 
@@ -50,12 +50,12 @@ namespace View
 
         public double ConvertFromKelvin(double temperature)
         {
-            return temperature * 1.8 - 459.67;
+            return Math.Round(temperature * 1.8 - 459.67, 2);
         }
 
         public double ConvertToKelvin(double temperature)
         {
-            return (temperature + 459.67) / 1.8;
+            return Math.Round((temperature + 459.67) / 1.8, 2);
         }
     }
 }
