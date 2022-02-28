@@ -52,13 +52,18 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="32"/>
                             </Grid.RowDefinitions>
-                            <Button Grid.Column="0" Content="-" Style="{StaticResource buttonStyle}"/>
+                            <Button Grid.Column="0"
+                                    Content="-" 
+                                    Command="{Binding Add}"
+                                    CommandParameter="-1"
+                                    Style="{StaticResource buttonStyle}"/>
                             <TextBox Grid.Column="1"
                                  Text="{Binding Path=Temperature.Value, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource textBoxStyle}"/>
                             <Button Grid.Column="2"
                                     Content="+"
-                                    Command="{Binding Increment}"
+                                    Command="{Binding Add}"
+                                    CommandParameter="+1"
                                     Style="{StaticResource buttonStyle}"/>
                         </Grid>
                     </Grid>

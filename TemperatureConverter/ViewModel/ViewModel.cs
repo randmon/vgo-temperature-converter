@@ -50,21 +50,21 @@ namespace ViewModel
                 kelvin => temperatureScale.ConvertFromKelvin(kelvin),
                 t => temperatureScale.ConvertToKelvin(t));
 
-            this.Increment = new IncrementCommand(this.Temperature);
+            this.Add = new AddCommand(this.Temperature);
         }
 
         public string Name => temperatureScale.Name;
 
         public Cell<double> Temperature { get; }
 
-        public ICommand Increment { get; }
+        public ICommand Add { get; }
     }
 
-    public class IncrementCommand : ICommand
+    public class AddCommand : ICommand
     {
         private readonly Cell<double> cell;
 
-        public IncrementCommand(Cell<double> cell)
+        public AddCommand(Cell<double> cell)
         {
             this.cell = cell;
         }
@@ -78,7 +78,7 @@ namespace ViewModel
 
         public void Execute(object parameter)
         {
-            cell.Value = Math.Round(cell.Value + 1, 2);
+            cell.Value = Math.Round(cell.Value + int.Parse((string) parameter), 2);
         }
     }
 }
