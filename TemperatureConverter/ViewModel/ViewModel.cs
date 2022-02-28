@@ -50,35 +50,47 @@ namespace ViewModel
                 kelvin => temperatureScale.ConvertFromKelvin(kelvin),
                 t => temperatureScale.ConvertToKelvin(t));
 
-            this.Add = new AddCommand(this.Temperature);
+            var minimum = temperatureScale.ConvertFromKelvin(0);
+            var maximum = temperatureScale.ConvertFromKelvin(1000);
+            this.Increment = new AddCommand(this.Temperature, 1, minimum, maximum);
+            this.Decrement = new AddCommand(this.Temperature, -1, minimum, maximum);
         }
 
         public string Name => temperatureScale.Name;
 
         public Cell<double> Temperature { get; }
 
-        public ICommand Add { get; }
+        public ICommand Increment { get; }
+        public ICommand Decrement { get; }
     }
 
     public class AddCommand : ICommand
     {
         private readonly Cell<double> cell;
+        private readonly int delta;
+        private readonly double minimum, maximum;
 
-        public AddCommand(Cell<double> cell)
+        public AddCommand(Cell<double> cell, int delta, double minimum, double maximum)
         {
             this.cell = cell;
+            this.delta = delta;
+            this.minimum = minimum;
+            this.maximum = maximum;
+
+            this.cell.PropertyChanged += (sender, args) => CanExecuteChanged(this, new EventArgs());
         }
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            var newValue = cell.Value + delta;
+            return minimum <= newValue && newValue <= maximum;
         }
 
         public void Execute(object parameter)
         {
-            cell.Value = Math.Round(cell.Value + int.Parse((string) parameter), 2);
+            cell.Value = Math.Round(cell.Value + delta, 2);
         }
     }
 }

@@ -28,7 +28,7 @@
             <Setter Property="Padding" Value="2"/>
         </Style>
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#aaa"/>
+            <Setter Property="Background" Value="white"/>
             <Setter Property="Foreground" Value="#222"/>
             <Setter Property="Padding" Value="2"/>
         </Style>
@@ -49,12 +49,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="32"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="32"/>
-                            </Grid.RowDefinitions>
                             <Button Grid.Column="0"
                                     Content="-" 
-                                    Command="{Binding Add}"
+                                    Command="{Binding Decrement}"
                                     CommandParameter="-1"
                                     Style="{StaticResource buttonStyle}"/>
                             <TextBox Grid.Column="1"
@@ -62,7 +59,7 @@
                                  Style="{StaticResource textBoxStyle}"/>
                             <Button Grid.Column="2"
                                     Content="+"
-                                    Command="{Binding Add}"
+                                    Command="{Binding Increment}"
                                     CommandParameter="+1"
                                     Style="{StaticResource buttonStyle}"/>
                         </Grid>
