@@ -53,7 +53,8 @@
                                     CommandParameter="-1"
                                     Style="{StaticResource buttonStyle}"/>
             <TextBox Grid.Column="1"
-                                 Text="{Binding Path=Temperature.Value, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Path=Value, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl},
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource textBoxStyle}"/>
             <Button Grid.Column="2"
                                     Content="+"
